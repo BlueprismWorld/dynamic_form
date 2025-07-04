@@ -16,7 +16,7 @@ export default function Home() {
           <p className="text-lg text-gray-600 mb-4">
             A comprehensive showcase of all available components loaded from JSON configuration
           </p>
-          <div className="flex justify-center space-x-4">
+          <div className="flex justify-center space-x-4 mb-6">
             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
               17 Components
             </span>
@@ -26,6 +26,20 @@ export default function Home() {
             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
               TypeScript
             </span>
+          </div>
+          <div className="flex justify-center space-x-4">
+            <a
+              href="/builder"
+              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              🛠️ Open Form Builder
+            </a>
+            <button
+              onClick={() => window.location.reload()}
+              className="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              🔄 Reload Showcase
+            </button>
           </div>
         </div>
         
