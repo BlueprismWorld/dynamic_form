@@ -80,9 +80,9 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
       case 'date':
       case 'time':
         return (
-          <div className="space-y-2">
+          <div className="space-y-1">
             {componentAny.label && (
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-medium text-gray-700">
                 {componentAny.label}
                 {componentAny.required && <span className="text-red-500 ml-1">*</span>}
               </label>
@@ -91,44 +91,44 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
               type={componentType}
               placeholder={componentAny.placeholder}
               disabled
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed"
+              className="block w-full px-2 py-1 border border-gray-300 rounded text-xs bg-gray-50 text-gray-500 cursor-not-allowed"
             />
           </div>
         );
 
       case 'textarea':
         return (
-          <div className="space-y-2">
+          <div className="space-y-1">
             {componentAny.label && (
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-medium text-gray-700">
                 {componentAny.label}
                 {componentAny.required && <span className="text-red-500 ml-1">*</span>}
               </label>
             )}
             <textarea
               placeholder={componentAny.placeholder}
-              rows={componentAny.rows || 3}
+              rows={2}
               disabled
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed resize-none"
+              className="block w-full px-2 py-1 border border-gray-300 rounded text-xs bg-gray-50 text-gray-500 cursor-not-allowed resize-none"
             />
           </div>
         );
 
       case 'select':
         return (
-          <div className="space-y-2">
+          <div className="space-y-1">
             {componentAny.label && (
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-medium text-gray-700">
                 {componentAny.label}
                 {componentAny.required && <span className="text-red-500 ml-1">*</span>}
               </label>
             )}
             <select
               disabled
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed"
+              className="block w-full px-2 py-1 border border-gray-300 rounded text-xs bg-gray-50 text-gray-500 cursor-not-allowed"
             >
               <option>Select an option...</option>
-              {componentAny.options?.map((option: any, idx: number) => (
+              {componentAny.options?.slice(0, 2).map((option: any, idx: number) => (
                 <option key={idx} value={option.value}>
                   {option.label}
                 </option>
@@ -139,15 +139,15 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
 
       case 'radio':
         return (
-          <div className="space-y-3">
+          <div className="space-y-1">
             {componentAny.label && (
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-medium text-gray-700">
                 {componentAny.label}
                 {componentAny.required && <span className="text-red-500 ml-1">*</span>}
               </label>
             )}
-            <div className="space-y-2">
-              {componentAny.options?.map((option: any, idx: number) => (
+            <div className="space-y-1">
+              {componentAny.options?.slice(0, 2).map((option: any, idx: number) => (
                 <label key={idx} className="flex items-center">
                   <input
                     type="radio"
@@ -156,24 +156,27 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
                     disabled
                     className="mr-2 text-blue-600 cursor-not-allowed"
                   />
-                  <span className="text-gray-500">{option.label}</span>
+                  <span className="text-xs text-gray-500">{option.label}</span>
                 </label>
               ))}
+              {componentAny.options?.length > 2 && (
+                <span className="text-xs text-gray-400">...and {componentAny.options.length - 2} more</span>
+              )}
             </div>
           </div>
         );
 
       case 'checkbox':
         return (
-          <div className="space-y-3">
+          <div className="space-y-1">
             {componentAny.label && (
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-medium text-gray-700">
                 {componentAny.label}
                 {componentAny.required && <span className="text-red-500 ml-1">*</span>}
               </label>
             )}
-            <div className="space-y-2">
-              {componentAny.options?.map((option: any, idx: number) => (
+            <div className="space-y-1">
+              {componentAny.options?.slice(0, 2).map((option: any, idx: number) => (
                 <label key={idx} className="flex items-center">
                   <input
                     type="checkbox"
@@ -181,9 +184,12 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
                     disabled
                     className="mr-2 text-blue-600 cursor-not-allowed"
                   />
-                  <span className="text-gray-500">{option.label}</span>
+                  <span className="text-xs text-gray-500">{option.label}</span>
                 </label>
               ))}
+              {componentAny.options?.length > 2 && (
+                <span className="text-xs text-gray-400">...and {componentAny.options.length - 2} more</span>
+              )}
             </div>
           </div>
         );
@@ -193,7 +199,7 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
           <button
             type="button"
             disabled
-            className={`px-4 py-2 rounded-md cursor-not-allowed ${
+            className={`px-3 py-1 rounded text-xs cursor-not-allowed ${
               componentAny.variant === 'primary' ? 'bg-blue-200 text-blue-800' :
               componentAny.variant === 'secondary' ? 'bg-gray-200 text-gray-800' :
               componentAny.variant === 'danger' ? 'bg-red-200 text-red-800' :
@@ -206,9 +212,9 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
 
       case 'file':
         return (
-          <div className="space-y-2">
+          <div className="space-y-1">
             {componentAny.label && (
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-medium text-gray-700">
                 {componentAny.label}
                 {componentAny.required && <span className="text-red-500 ml-1">*</span>}
               </label>
@@ -219,7 +225,7 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
                 accept={componentAny.accept}
                 multiple={componentAny.multiple}
                 disabled
-                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-not-allowed"
+                className="block w-full text-xs text-gray-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-not-allowed"
               />
             </div>
           </div>
@@ -231,23 +237,33 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  {componentAny.columns?.map((col: any, idx: number) => (
+                  {componentAny.columns?.slice(0, 3).map((col: any, idx: number) => (
                     <th
                       key={idx}
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      className="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
                       {col.title}
                     </th>
                   ))}
+                  {componentAny.columns?.length > 3 && (
+                    <th className="px-3 py-1 text-left text-xs font-medium text-gray-400">
+                      ...
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 <tr>
-                  {componentAny.columns?.map((col: any, idx: number) => (
-                    <td key={idx} className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      Sample data
+                  {componentAny.columns?.slice(0, 3).map((col: any, idx: number) => (
+                    <td key={idx} className="px-3 py-1 whitespace-nowrap text-xs text-gray-500">
+                      Sample
                     </td>
                   ))}
+                  {componentAny.columns?.length > 3 && (
+                    <td className="px-3 py-1 whitespace-nowrap text-xs text-gray-400">
+                      ...
+                    </td>
+                  )}
                 </tr>
               </tbody>
             </table>
@@ -272,7 +288,7 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
         return (
           <div
             className={`bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center ${componentAny.className || ''}`}
-            style={{ height: componentAny.height || 20 }}
+            style={{ height: Math.min(componentAny.height || 20, 30) }}
           >
             <span className="text-xs text-gray-400">Spacer ({componentAny.height || 20}px)</span>
           </div>
@@ -284,15 +300,15 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
             <img
               src={componentAny.src}
               alt={componentAny.alt || 'Image'}
-              className={`max-w-full h-auto ${componentAny.className || ''}`}
+              className={`max-w-full h-auto max-h-16 ${componentAny.className || ''}`}
             />
           </div>
         );
 
       default:
         return (
-          <div className="p-4 bg-gray-100 border-2 border-dashed border-gray-300 rounded-md text-center">
-            <span className="text-sm text-gray-500">
+          <div className="p-2 bg-gray-100 border-2 border-dashed border-gray-300 rounded text-center">
+            <span className="text-xs text-gray-500">
               {componentType} component
             </span>
           </div>
@@ -307,10 +323,10 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
       {...attributes}
       {...listeners}
       className={`
-        relative group p-3 border rounded-md transition-all duration-200 cursor-grab active:cursor-grabbing overflow-hidden
+        relative group p-2 border rounded-lg transition-all duration-200 cursor-grab active:cursor-grabbing overflow-hidden
         ${isSelected 
-          ? 'border-blue-400 bg-blue-50/50 shadow-sm ring-1 ring-blue-200' 
-          : 'border-gray-200 hover:border-gray-300 hover:shadow-sm bg-white'
+          ? 'border-blue-400 bg-blue-50 shadow-lg ring-2 ring-blue-200' 
+          : 'border-gray-200 hover:border-gray-300 hover:shadow-md bg-white'
         }
       `}
       onClick={onSelect}
@@ -325,36 +341,38 @@ function SortableComponent({ component, index, isSelected, onSelect, onRemove }:
       role="button"
     >
       {/* Component Preview */}
-      {renderComponentPreview()}
+      <div className="text-sm">
+        {renderComponentPreview()}
+      </div>
 
       {/* Hover/Selected Actions */}
       <div className={`
-        absolute top-2 right-2 flex items-center gap-1 transition-opacity z-10
+        absolute top-1 right-1 flex items-center gap-1 transition-opacity z-10
         ${isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}
       `}>
         <div
-          className="p-1 bg-white border border-gray-200 rounded shadow-sm hover:bg-gray-50 cursor-grab active:cursor-grabbing focus:outline-none focus:ring-1 focus:ring-blue-400 pointer-events-none"
+          className="p-1 bg-white/90 backdrop-blur-sm border border-gray-300 rounded hover:bg-gray-50 cursor-grab active:cursor-grabbing focus:outline-none focus:ring-2 focus:ring-blue-500 pointer-events-none shadow-sm"
           title="Drag to reorder"
           aria-label="Drag to reorder component"
         >
-          <FiMove className="w-3 h-3 text-gray-500" />
+          <FiMove className="w-3 h-3 text-gray-600" />
         </div>
         <button
           onClick={(e) => {
             e.stopPropagation();
             onRemove();
           }}
-          className="p-1 bg-white border border-gray-200 rounded shadow-sm hover:bg-red-50 hover:border-red-200 focus:outline-none focus:ring-1 focus:ring-red-400"
+          className="p-1 bg-white/90 backdrop-blur-sm border border-gray-300 rounded hover:bg-red-50 hover:border-red-300 focus:outline-none focus:ring-2 focus:ring-red-500 shadow-sm"
           title="Remove component"
           aria-label="Remove component"
         >
-          <FiTrash2 className="w-3 h-3 text-red-500" />
+          <FiTrash2 className="w-3 h-3 text-red-600" />
         </button>
       </div>
 
       {/* Component Type Badge */}
-      <div className="absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-        <span className="px-1.5 py-0.5 bg-gray-900/80 text-white text-xs rounded shadow-sm backdrop-blur-sm">
+      <div className="absolute top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+        <span className="px-1.5 py-0.5 bg-gray-900/80 backdrop-blur-sm text-white text-xs rounded shadow-sm font-medium">
           {component.type}
         </span>
       </div>
@@ -375,7 +393,7 @@ function EmptyCanvasDropZone() {
     <div
       ref={setNodeRef}
       className={`
-        min-h-[300px] rounded-lg flex items-center justify-center transition-all duration-200
+        min-h-[200px] rounded-lg flex items-center justify-center transition-all duration-200
         ${isOver 
           ? 'bg-blue-50 border border-blue-300 border-dashed scale-[1.01] shadow-sm' 
           : 'bg-gray-50/50 border border-gray-200 border-dashed hover:border-blue-200 hover:bg-blue-50/30'
@@ -383,14 +401,14 @@ function EmptyCanvasDropZone() {
       `}
     >
       <div className="text-center">
-        <FiPlus className={`w-8 h-8 mx-auto mb-3 transition-colors ${isOver ? 'text-blue-500' : 'text-gray-400'}`} />
-        <h4 className={`text-base font-medium mb-1 transition-colors ${isOver ? 'text-blue-700' : 'text-gray-700'}`}>
+        <FiPlus className={`w-6 h-6 mx-auto mb-2 transition-colors ${isOver ? 'text-blue-500' : 'text-gray-400'}`} />
+        <h4 className={`text-sm font-medium mb-1 transition-colors ${isOver ? 'text-blue-700' : 'text-gray-700'}`}>
           {isOver ? 'Drop component here' : 'Start building your form'}
         </h4>
-        <p className={`text-sm mb-3 transition-colors ${isOver ? 'text-blue-600' : 'text-gray-500'}`}>
+        <p className={`text-xs mb-2 transition-colors ${isOver ? 'text-blue-600' : 'text-gray-500'}`}>
           {isOver ? 'Release to add component' : 'Drag components from the toolbox to get started'}
         </p>
-        <div className={`inline-flex items-center gap-2 text-xs transition-colors ${isOver ? 'text-blue-600' : 'text-gray-500'}`}>
+        <div className={`inline-flex items-center gap-1 text-xs transition-colors ${isOver ? 'text-blue-600' : 'text-gray-500'}`}>
           <FiMove className="w-3 h-3" />
           <span>{isOver ? 'Release to add' : 'Drag & drop components here'}</span>
         </div>
@@ -412,7 +430,7 @@ function CanvasDropZone() {
     <div
       ref={setNodeRef}
       className={`
-        min-h-[40px] rounded-md flex items-center justify-center transition-all duration-200 mt-3
+        min-h-[30px] rounded-md flex items-center justify-center transition-all duration-200 mt-2
         ${isOver 
           ? 'bg-blue-50 border border-blue-300 border-dashed scale-[1.02] shadow-sm' 
           : 'bg-gray-50/50 border border-gray-200 border-dashed hover:border-blue-200 hover:bg-blue-50/30'
@@ -420,7 +438,7 @@ function CanvasDropZone() {
       `}
     >
       <div className="text-center">
-        <FiPlus className={`w-4 h-4 mx-auto mb-1 transition-colors ${isOver ? 'text-blue-500' : 'text-gray-400'}`} />
+        <FiPlus className={`w-3 h-3 mx-auto mb-1 transition-colors ${isOver ? 'text-blue-500' : 'text-gray-400'}`} />
         <p className={`text-xs transition-colors ${isOver ? 'text-blue-700 font-medium' : 'text-gray-500'}`}>
           {isOver ? 'Drop component here' : 'Add more components'}
         </p>
@@ -441,26 +459,26 @@ export function CanvasArea({
   // Determine if we're sorting existing components or dragging from palette
   const isSorting = isDragActive && dragSourceType === 'component';
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="flex-1 flex flex-col bg-gray-50">
       {/* Canvas Header */}
-      <div className="flex-shrink-0 p-4 border-b border-gray-200 bg-white">
+      <div className="flex-shrink-0 px-4 py-3 border-b border-gray-200 bg-white">
         <div className="flex items-center justify-between">
           <div>
             <div className="flex items-center space-x-2">
-              <h3 className="text-lg font-semibold text-gray-900">Form Canvas</h3>
+              <h3 className="text-base font-semibold text-gray-900">Form Canvas</h3>
               {isDragActive && (
-                <div className="flex items-center space-x-1 text-blue-600">
-                  <FiMove className="w-4 h-4" />
-                  <span className="text-sm">{isSorting ? "Sorting components..." : "Adding new component..."}</span>
+                <div className="flex items-center space-x-1 px-2 py-1 bg-blue-50 text-blue-700 rounded text-xs">
+                  <FiMove className="w-3 h-3" />
+                  <span>{isSorting ? "Reordering..." : "Adding component..."}</span>
                 </div>
               )}
             </div>
-            <p className="text-sm text-gray-500">
-              {components.length} component{components.length !== 1 ? 's' : ''}
+            <p className="text-xs text-gray-500 mt-0.5">
+              {components.length} component{components.length !== 1 ? 's' : ''} • Design your form layout
             </p>
           </div>
-          <div className="flex items-center gap-2">
-            <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg">
+          <div className="flex items-center gap-1">
+            <button className="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
               <FiSettings className="w-4 h-4" />
             </button>
           </div>
@@ -468,11 +486,11 @@ export function CanvasArea({
       </div>
 
       {/* Canvas Content */}
-      <div className="flex-1 overflow-y-auto p-6 bg-gray-50">
-        <div className="max-w-2xl mx-auto">
+      <div className="flex-1 overflow-y-auto p-4">
+        <div className="w-full max-w-none">
           {/* Form Preview Container */}
-          <div className="bg-white border border-gray-200 rounded-lg shadow-sm min-h-[400px] overflow-hidden">
-            <div className="p-6 relative">
+          <div className="bg-white border border-gray-200 rounded-lg shadow-sm min-h-[300px] overflow-hidden">
+            <div className="p-4 relative">
               {components.length === 0 ? (
                 <EmptyCanvasDropZone />
               ) : (
@@ -481,7 +499,7 @@ export function CanvasArea({
                     items={components.map(c => c.id)}
                     strategy={verticalListSortingStrategy}
                   >
-                    <div className="space-y-4">
+                    <div className="space-y-2">
                       {components.map((component, index) => (
                         <SortableComponent
                           key={component.id}

@@ -737,7 +737,7 @@ export function ComponentPalette({
       {/* Main Content - Top */}
       <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
         {/* Header with Search */}
-        <div className="p-3 border-b border-gray-200 bg-white flex-shrink-0">
+        <div className="p-2 border-b border-gray-200 bg-white flex-shrink-0">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-semibold text-gray-900">
               {activeTab === PaletteTab.TOOLBOX ? 'Components' : 'Data Sources'}
@@ -752,7 +752,7 @@ export function ComponentPalette({
               placeholder={activeTab === PaletteTab.TOOLBOX ? "Search components..." : "Search data sources..."}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-9 pr-3 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
         </div>
@@ -1068,13 +1068,13 @@ export function ComponentPalette({
       </div>
 
       {/* Bottom Tabs */}
-      <div className="h-14 bg-gray-100 border-t border-gray-200 flex flex-shrink-0">
+      <div className="h-10 bg-gray-100 border-t border-gray-200 flex flex-shrink-0">
         {/* Main tabs (Toolbox/Sources) */}
         <div className="flex w-full">
           <motion.button
             onClick={() => setActiveTab(PaletteTab.TOOLBOX)}
             className={`
-              flex flex-col items-center justify-center p-2 flex-1
+              flex flex-col items-center justify-center p-1 flex-1
               ${activeTab === PaletteTab.TOOLBOX 
                 ? 'bg-white border-t-2 border-blue-500' 
                 : 'hover:bg-gray-200'}
@@ -1084,13 +1084,13 @@ export function ComponentPalette({
             whileTap={{ scale: 0.95 }}
             title="Toolbox"
           >
-            <FiPackage className={`w-5 h-5 ${activeTab === PaletteTab.TOOLBOX ? 'text-blue-600' : 'text-gray-600'}`} />
+            <FiPackage className={`w-4 h-4 ${activeTab === PaletteTab.TOOLBOX ? 'text-blue-600' : 'text-gray-600'}`} />
             <span className="text-xs mt-1 leading-none">Toolbox</span>
           </motion.button>
           <motion.button
             onClick={() => setActiveTab(PaletteTab.SOURCES)}
             className={`
-              flex flex-col items-center justify-center p-2 flex-1
+              flex flex-col items-center justify-center p-1 flex-1
               ${activeTab === PaletteTab.SOURCES 
                 ? 'bg-white border-t-2 border-blue-500' 
                 : 'hover:bg-gray-200'}
@@ -1100,7 +1100,7 @@ export function ComponentPalette({
             whileTap={{ scale: 0.95 }}
             title="Sources"
           >
-            <FiDatabase className={`w-5 h-5 ${activeTab === PaletteTab.SOURCES ? 'text-blue-600' : 'text-gray-600'}`} />
+            <FiDatabase className={`w-4 h-4 ${activeTab === PaletteTab.SOURCES ? 'text-blue-600' : 'text-gray-600'}`} />
             <span className="text-xs mt-1 leading-none">Sources</span>
           </motion.button>
         </div>
