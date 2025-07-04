@@ -6,6 +6,69 @@ export interface BaseComponentConfig {
   className?: string;
   style?: React.CSSProperties;
   visibleIf?: ConditionalRule;
+  styleConfig?: StyleConfig;
+}
+
+export interface StyleConfig {
+  // Layout & Positioning
+  width?: string;
+  height?: string;
+  margin?: string;
+  padding?: string;
+  
+  // Typography
+  fontSize?: string;
+  fontWeight?: string;
+  fontFamily?: string;
+  color?: string;
+  textAlign?: 'left' | 'center' | 'right' | 'justify';
+  lineHeight?: string;
+  
+  // Background
+  backgroundColor?: string;
+  backgroundImage?: string;
+  backgroundSize?: string;
+  backgroundPosition?: string;
+  
+  // Border
+  border?: string;
+  borderRadius?: string;
+  borderColor?: string;
+  borderWidth?: string;
+  borderStyle?: string;
+  
+  // Box Shadow
+  boxShadow?: string;
+  
+  // Flexbox
+  display?: string;
+  flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+  justifyContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
+  alignItems?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
+  gap?: string;
+  
+  // Grid
+  gridTemplateColumns?: string;
+  gridTemplateRows?: string;
+  gridGap?: string;
+  
+  // Position
+  position?: 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky';
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+  zIndex?: number;
+  
+  // Animation
+  transition?: string;
+  transform?: string;
+  
+  // Visibility
+  opacity?: number;
+  visibility?: 'visible' | 'hidden';
+  overflow?: 'visible' | 'hidden' | 'scroll' | 'auto';
 }
 
 export interface FormInputConfig extends BaseComponentConfig {

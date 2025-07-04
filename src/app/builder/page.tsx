@@ -1,12 +1,14 @@
 'use client';
 
 import { FormBuilder } from '../../components/form-builder/FormBuilder';
+import { FormRenderer } from '../../components/core/FormRenderer';
 import { FormSchema } from '../../lib/types/form';
 import { useState } from 'react';
 
 export default function FormBuilderPage() {
   const [savedSchema, setSavedSchema] = useState<FormSchema | null>(null);
   const [showPreview, setShowPreview] = useState(false);
+  const [previewTab, setPreviewTab] = useState<'form' | 'json'>('form');
 
   const handleSave = (schema: FormSchema) => {
     setSavedSchema(schema);
@@ -43,20 +45,48 @@ export default function FormBuilderPage() {
               </div>
             </div>
             <div className="p-6">
-              <div className="bg-gray-50 rounded-lg p-4 mb-4">
-                <h3 className="font-medium text-gray-900 mb-2">Generated JSON Schema:</h3>
-                <pre className="bg-gray-800 text-green-400 p-3 rounded text-sm overflow-x-auto">
-                  {JSON.stringify(savedSchema, null, 2)}
-                </pre>
+              {/* Tab Navigation */}
+              <div className="flex border-b border-gray-200 mb-6">
+                <button
+                  onClick={() => setPreviewTab('form')}
+                  className={`px-4 py-2 font-medium text-sm border-b-2 ${
+                    previewTab === 'form'
+                      ? 'border-blue-500 text-blue-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  Form Preview
+                </button>
+                <button
+                  onClick={() => setPreviewTab('json')}
+                  className={`px-4 py-2 font-medium text-sm border-b-2 ml-8 ${
+                    previewTab === 'json'
+                      ? 'border-blue-500 text-blue-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  JSON Schema
+                </button>
               </div>
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h3 className="font-medium text-gray-900 mb-4">Form Preview:</h3>
-                {/* Note: You would use FormRenderer here once it's imported */}
-                <div className="text-center py-8 text-gray-500">
-                  <p>Form preview would be rendered here using the FormRenderer component</p>
-                  <p className="text-sm mt-2">Import FormRenderer to see the live preview</p>
+              
+              {/* Tab Content */}
+              {previewTab === 'form' && (
+                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <FormRenderer 
+                    schema={savedSchema} 
+                    className="max-w-none"
+                  />
                 </div>
-              </div>
+              )}
+              
+              {previewTab === 'json' && (
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <h3 className="font-medium text-gray-900 mb-2">Generated JSON Schema:</h3>
+                  <pre className="bg-gray-800 text-green-400 p-3 rounded text-sm overflow-x-auto">
+                    {JSON.stringify(savedSchema, null, 2)}
+                  </pre>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -327,6 +327,25 @@ export function FormBuilder({ onSave, onPreview, initialSchema }: FormBuilderPro
       ...prev,
       [dataSourceId]: schema
     }));
+    
+    // Auto-connect the data source when schema is loaded
+    setDataSources(prev => 
+      prev.map(ds => 
+        ds.id === dataSourceId ? { ...ds, connected: true, schema } : ds
+      )
+    );
+  }, []);
+
+  const handleGenerateFormSchema = useCallback((generatedSchema: FormSchema) => {
+    // Apply the generated schema to the current form
+    setFormSchema(generatedSchema);
+    
+    // Clear current selection
+    setSelectedComponent(null);
+    setSelectedComponentIndex(null);
+    
+    // Show a success message or notification
+    console.log('Form schema generated and applied:', generatedSchema);
   }, []);
 
   // Form Operations
@@ -542,6 +561,7 @@ export function FormBuilder({ onSave, onPreview, initialSchema }: FormBuilderPro
                 onAddDataSource={addDataSource}
                 onSelectDataSource={selectDataSource}
                 onUpdateSchema={updateDataSourceSchema}
+                onGenerateFormSchema={handleGenerateFormSchema}
               />
             </div>
           </div>

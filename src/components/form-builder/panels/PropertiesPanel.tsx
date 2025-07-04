@@ -554,92 +554,290 @@ export function PropertiesPanel({
   );
 
   const renderStyling = () => (
-    <div className="space-y-2">
-      {/* CSS Class */}
-      <div>
-        <label className="block text-xs font-medium text-gray-600 mb-1">
-          CSS Classes
-        </label>
-        <input
-          type="text"
-          value={getCurrentValue('className') || ''}
-          onChange={(e) => handleUpdateComponent({ className: e.target.value })}
-          className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400"
-          placeholder="e.g., text-lg font-bold"
-        />
-      </div>
-
-      {/* Visibility */}
-      <div>
-        <label className="block text-xs font-medium text-gray-600 mb-1">
-          Visibility
-        </label>
-        <div className="flex items-center justify-center gap-2 p-1 bg-gray-50 rounded">
-          <button
-            onClick={() => handleUpdateComponent({ hidden: false })}
-            className={`
-              flex items-center px-2 py-1 text-xs rounded flex-1 justify-center transition-colors
-              ${getCurrentValue('hidden') !== true 
-                ? 'bg-white shadow-sm border border-gray-200 text-blue-600 font-medium' 
-                : 'text-gray-500 hover:bg-gray-100'
-              }
-            `}
-          >
-            <FiEye className="w-3 h-3 mr-1" />
-            Visible
-          </button>
-          <button
-            onClick={() => handleUpdateComponent({ hidden: true })}
-            className={`
-              flex items-center px-2 py-1 text-xs rounded flex-1 justify-center transition-colors
-              ${getCurrentValue('hidden') === true 
-                ? 'bg-white shadow-sm border border-gray-200 text-blue-600 font-medium' 
-                : 'text-gray-500 hover:bg-gray-100'
-              }
-            `}
-          >
-            <FiEyeOff className="w-3 h-3 mr-1" />
-            Hidden
-          </button>
+    <div className="space-y-4">
+      {/* Layout & Dimensions */}
+      <div className="space-y-2">
+        <h5 className="text-xs font-semibold text-gray-800 border-b border-gray-200 pb-1">Layout & Dimensions</h5>
+        
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Width</label>
+            <input
+              type="text"
+              value={getCurrentValue('styleConfig')?.width || ''}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), width: e.target.value }
+              })}
+              className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+              placeholder="auto, 100px, 50%"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Height</label>
+            <input
+              type="text"
+              value={getCurrentValue('styleConfig')?.height || ''}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), height: e.target.value }
+              })}
+              className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+              placeholder="auto, 100px, 50%"
+            />
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Margin</label>
+            <input
+              type="text"
+              value={getCurrentValue('styleConfig')?.margin || ''}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), margin: e.target.value }
+              })}
+              className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+              placeholder="0, 8px, 1rem"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Padding</label>
+            <input
+              type="text"
+              value={getCurrentValue('styleConfig')?.padding || ''}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), padding: e.target.value }
+              })}
+              className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+              placeholder="0, 8px, 1rem"
+            />
+          </div>
         </div>
       </div>
 
-      {/* Width & Margin in a 2-column grid */}
-      <div className="grid grid-cols-2 gap-2">
-        {/* Width */}
-        <div>
-          <label className="block text-xs font-medium text-gray-600 mb-1">
-            Width
-          </label>
-          <select
-            value={getCurrentValue('width') || 'full'}
-            onChange={(e) => handleUpdateComponent({ width: e.target.value })}
-            className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400"
-          >
-            <option value="full">Full</option>
-            <option value="1/2">1/2</option>
-            <option value="1/3">1/3</option>
-            <option value="2/3">2/3</option>
-            <option value="1/4">1/4</option>
-            <option value="3/4">3/4</option>
-          </select>
+      {/* Typography */}
+      <div className="space-y-2">
+        <h5 className="text-xs font-semibold text-gray-800 border-b border-gray-200 pb-1">Typography</h5>
+        
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Font Size</label>
+            <input
+              type="text"
+              value={getCurrentValue('styleConfig')?.fontSize || ''}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), fontSize: e.target.value }
+              })}
+              className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+              placeholder="14px, 1rem, small"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Font Weight</label>
+            <select
+              value={getCurrentValue('styleConfig')?.fontWeight || ''}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), fontWeight: e.target.value }
+              })}
+              className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+            >
+              <option value="">Default</option>
+              <option value="normal">Normal</option>
+              <option value="bold">Bold</option>
+              <option value="lighter">Lighter</option>
+              <option value="bolder">Bolder</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="300">300</option>
+              <option value="400">400</option>
+              <option value="500">500</option>
+              <option value="600">600</option>
+              <option value="700">700</option>
+              <option value="800">800</option>
+              <option value="900">900</option>
+            </select>
+          </div>
         </div>
+        
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Color</label>
+            <div className="flex gap-1">
+              <input
+                type="color"
+                value={getCurrentValue('styleConfig')?.color || '#000000'}
+                onChange={(e) => handleUpdateComponent({ 
+                  styleConfig: { ...getCurrentValue('styleConfig'), color: e.target.value }
+                })}
+                className="w-8 h-6 border border-gray-200 rounded cursor-pointer"
+              />
+              <input
+                type="text"
+                value={getCurrentValue('styleConfig')?.color || ''}
+                onChange={(e) => handleUpdateComponent({ 
+                  styleConfig: { ...getCurrentValue('styleConfig'), color: e.target.value }
+                })}
+                className="flex-1 px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+                placeholder="#000000"
+              />
+            </div>
+          </div>
+          
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Text Align</label>
+            <select
+              value={getCurrentValue('styleConfig')?.textAlign || ''}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), textAlign: e.target.value as any }
+              })}
+              className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+            >
+              <option value="">Default</option>
+              <option value="left">Left</option>
+              <option value="center">Center</option>
+              <option value="right">Right</option>
+              <option value="justify">Justify</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
-        {/* Margin */}
+      {/* Background */}
+      <div className="space-y-2">
+        <h5 className="text-xs font-semibold text-gray-800 border-b border-gray-200 pb-1">Background</h5>
+        
         <div>
-          <label className="block text-xs font-medium text-gray-600 mb-1">
-            Margin
-          </label>
-          <select
-            value={getCurrentValue('margin') || 'normal'}
-            onChange={(e) => handleUpdateComponent({ margin: e.target.value })}
-            className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400"
-          >
-            <option value="none">None</option>
-            <option value="small">Small</option>
-            <option value="normal">Normal</option>
-            <option value="large">Large</option>
-          </select>
+          <label className="block text-xs font-medium text-gray-600 mb-1">Background Color</label>
+          <div className="flex gap-1">
+            <input
+              type="color"
+              value={getCurrentValue('styleConfig')?.backgroundColor || '#ffffff'}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), backgroundColor: e.target.value }
+              })}
+              className="w-8 h-6 border border-gray-200 rounded cursor-pointer"
+            />
+            <input
+              type="text"
+              value={getCurrentValue('styleConfig')?.backgroundColor || ''}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), backgroundColor: e.target.value }
+              })}
+              className="flex-1 px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+              placeholder="#ffffff, transparent"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Border */}
+      <div className="space-y-2">
+        <h5 className="text-xs font-semibold text-gray-800 border-b border-gray-200 pb-1">Border</h5>
+        
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Border Width</label>
+            <input
+              type="text"
+              value={getCurrentValue('styleConfig')?.borderWidth || ''}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), borderWidth: e.target.value }
+              })}
+              className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+              placeholder="1px, 2px"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Border Style</label>
+            <select
+              value={getCurrentValue('styleConfig')?.borderStyle || ''}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), borderStyle: e.target.value }
+              })}
+              className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+            >
+              <option value="">None</option>
+              <option value="solid">Solid</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+              <option value="double">Double</option>
+            </select>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Border Color</label>
+            <div className="flex gap-1">
+              <input
+                type="color"
+                value={getCurrentValue('styleConfig')?.borderColor || '#d1d5db'}
+                onChange={(e) => handleUpdateComponent({ 
+                  styleConfig: { ...getCurrentValue('styleConfig'), borderColor: e.target.value }
+                })}
+                className="w-8 h-6 border border-gray-200 rounded cursor-pointer"
+              />
+              <input
+                type="text"
+                value={getCurrentValue('styleConfig')?.borderColor || ''}
+                onChange={(e) => handleUpdateComponent({ 
+                  styleConfig: { ...getCurrentValue('styleConfig'), borderColor: e.target.value }
+                })}
+                className="flex-1 px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+                placeholder="#d1d5db"
+              />
+            </div>
+          </div>
+          
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Border Radius</label>
+            <input
+              type="text"
+              value={getCurrentValue('styleConfig')?.borderRadius || ''}
+              onChange={(e) => handleUpdateComponent({ 
+                styleConfig: { ...getCurrentValue('styleConfig'), borderRadius: e.target.value }
+              })}
+              className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+              placeholder="0, 4px, 50%"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Box Shadow */}
+      <div className="space-y-2">
+        <h5 className="text-xs font-semibold text-gray-800 border-b border-gray-200 pb-1">Shadow</h5>
+        
+        <div>
+          <label className="block text-xs font-medium text-gray-600 mb-1">Box Shadow</label>
+          <input
+            type="text"
+            value={getCurrentValue('styleConfig')?.boxShadow || ''}
+            onChange={(e) => handleUpdateComponent({ 
+              styleConfig: { ...getCurrentValue('styleConfig'), boxShadow: e.target.value }
+            })}
+            className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+            placeholder="0 1px 3px rgba(0,0,0,0.1)"
+          />
+        </div>
+      </div>
+
+      {/* CSS Classes (existing functionality) */}
+      <div className="space-y-2">
+        <h5 className="text-xs font-semibold text-gray-800 border-b border-gray-200 pb-1">CSS Classes</h5>
+        
+        <div>
+          <label className="block text-xs font-medium text-gray-600 mb-1">CSS Classes</label>
+          <input
+            type="text"
+            value={getCurrentValue('className') || ''}
+            onChange={(e) => handleUpdateComponent({ className: e.target.value })}
+            className="w-full px-2 py-1 text-xs border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-400"
+            placeholder="e.g., text-lg font-bold"
+          />
         </div>
       </div>
     </div>
